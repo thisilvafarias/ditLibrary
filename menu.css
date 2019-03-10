@@ -1,0 +1,51 @@
+ul {
+	list-style-type: none; 
+	margin: 0;
+	padding: 0;
+	overflow: 
+	hidden; 
+	background-color: rgba(0, 0, 0, 0.9);
+
+}
+
+li {
+	float: right;
+} 
+li a {
+	display: inline-block; 
+	color: white;
+	text-align: center; 
+	padding: 14px 16px; 
+	text-decoration: none;
+}
+li a:hover { 
+    background: darkgray;
+    color: white;
+    
+}
+
+.footer {
+  color: white;
+  position: absolute;
+  right: 0;
+  bottom: 10;
+  left: 10;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+.myInput {
+  background: black url("images/icon.png") left no-repeat;
+   background-position: 0px 0px;
+   background-size: 10%;
+  padding-left: 14px;
+  font-size: 16px;
+  color: #BEBEBE;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+   width: 30%;
+   margin-left:33.33%; 
+}
+
