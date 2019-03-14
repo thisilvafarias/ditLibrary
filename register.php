@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+//ob_start();
 
 include('header.php'); 
 
@@ -10,7 +10,7 @@ $studentIDErr = "";
 $studentID = "";
 $password = "";
 $passwordErr = "";
-$alredyExit = "";
+$alreadyExit = "";
 $captchaErr = "";
 
 
@@ -40,7 +40,7 @@ if($_POST){
 
 
 
-              if (empty($usernameErr) && empty($studentIDErr) && empty($passwordErr)) { 
+              if (empty($usernameErr) && empty($studentIDErr) && empty($passwordErr)) {
               
               try {
                   include('db.php'); 
@@ -49,43 +49,32 @@ if($_POST){
                   $checkUserStmt->bindParam(1, $username);
                   $checkUserStmt->execute();
                                 
-                    //teste
-                    if(isset($_POST['submit'])){
-
-                     //   if(isset($_POST['g-recaptcha-response'])){
-                      //      $captcha=$_POST['g-recaptcha-response'];
-                                
-                            //    if(!$captcha){
-
-                            //    $captchaErr = 'Please check it if you are not a robot';
-                              
-                                   
-                            //    }
-                               
+                    //test
+                    if(isset($_POST['submit'])) {
 
 
-                                     if ($checkUserStmt->rowCount() == 0) { //no user with this $name exists
-                          
-                                      $phash = password_hash($password, PASSWORD_BCRYPT);
+                        if ($checkUserStmt->rowCount() == 0) { //no user with this $name exists
 
-                                      $sql = "INSERT INTO libraryUsers (username, password, id_user) VALUES (?, ?, ?);";
-                                      $sth = $DBH->prepare($sql);
+                            //hash the password entered by the user
+                            $phash = password_hash($password, PASSWORD_BCRYPT);
 
-                                      $sth->bindParam(1, $username);
-                                      $sth->bindParam(2, $phash);
-                                      $sth->bindParam(3, $studentID);
+                            $sql = "INSERT INTO libraryUsers (username, password, id_user) VALUES (?, ?, ?);";
+                            $sth = $DBH->prepare($sql);
 
-                                      $sth->execute();
-                                      $_SESSION["username"] = $username;
-                                      $_SESSION["user_id"] = $studentID;
-                                      header("Location: registered.php?username=".$_SESSION["username"]);
-                                      exit();
-                                      }//if $chechUsersmt == 0
-                             
-                    }else{
-                        $alredyExit = "Username already taken!";
+                            $sth->bindParam(1, $username);
+                            $sth->bindParam(2, $phash);
+                            $sth->bindParam(3, $studentID);
+
+                            $sth->execute();
+                            $_SESSION["username"] = $username;
+                            $_SESSION["user_id"] = $studentID;
+                            header("Location: registered.php?username=" . $_SESSION["username"]);
+                            exit();
+                        } else{
+                            $alreadyExit = 'Username already taken, please enter another username';
+                         }
                     }
-                 } catch(PDOException $e) {echo $e->getMessage();} 
+                 } catch(PDOException $e) {echo $e->getMessage();}
               }  
 
  } //if_$post
@@ -109,8 +98,8 @@ if($_POST){
   </style>
 </head>
 <body class="bgimg">
-<img class="logo" src="images/logo_banner.jpg" alt="logo">
-<br></br>   
+<img class="logo" src="images/logo_banner.png" alt="logo" style="width: 20%; height: 20%;">
+<br>
 <div style="background-color:rgba(0, 0, 0, 0.9);">
    <div>
       <h1 class="probootstrap-heading"> Registration Form </h1>
@@ -122,23 +111,17 @@ if($_POST){
                               <span class = "error"><?php echo $studentIDErr;?></span>
             
             <h2> Password  </h2><input type="password" name="password" value="<?php echo $password; ?>" 
-            required required minlength='6' maxlength='10'
-             /> 
+            required required minlength='6' maxlength='10' />
                                 <span class = "error"><?php echo $passwordErr;?></span>
 
                          <input class="buttonSub" type="submit" name="submit" value="Sign up"/>
-                       
 
-                    <!--    <span class = "error"><?php echo $alredyExit;?></span> 
-                       <div class="g-recaptcha" data-sitekey="6Lds6jwUAAAAAMIV4hK1pDs5Vw1csWbkZElO4K8E"></div> 
-
-
-                         		<span class = "error"><?php echo $captchaErr;?></span> -->
+                         <span class = "error"><?php echo $alreadyExit;?></span>
 
             
         </form>    	
    </div>
-   <br></br> 
+   <br>
 </div>
 <?php
 include('footer.php'); 

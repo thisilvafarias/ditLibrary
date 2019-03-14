@@ -100,7 +100,7 @@ function filterTable($query)
     </head>
     <body class="bgimg">
 
-        <img class="logo" src="images/logo_banner.jpg" alt="logo">
+        <img class="logo" src="images/logo_banner.png" alt="logo" style="width: 20%; height: 20%;">
         <br></br>   
         <div style="background-color:rgba(0, 0, 0, 0.9);"> 
              

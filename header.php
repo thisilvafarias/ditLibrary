@@ -9,11 +9,9 @@ session_start();
 <link rel="stylesheet" href="css/menu.css"> 
  
  <ul>
-		
-
-		<li><a href="index.php">CCT</a></li>
+		<li><a href="index.php">DIT</a></li>
 		<li><a href="index.php">About us</a></li>
-		<li><a href="index.php">CCT Library</a></li>
+		<li><a href="index.php">DIT Library</a></li>
 		<li><a
 		
 		<?php

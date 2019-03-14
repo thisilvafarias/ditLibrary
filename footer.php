@@ -6,7 +6,7 @@
 
 <div>
 	<div class="footer" > <br/><br/>&copy; CCT
-          College 2017 by Thiago Farias </div>  
+         DT249 Internet Application Development Assessment - 2019 by Thiago S. Farias </div>
 </div> 
 
 </body> 

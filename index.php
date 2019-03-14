@@ -1,8 +1,6 @@
 <?php
+include('header.php');
 
-include('header.php'); 
-$_SESSION = array();
-session_destroy();
 ?>
 
 <!DOCTYPE>
@@ -14,11 +12,11 @@ session_destroy();
 
 
 <body class="bgimg">
-<img class="logo" src="images/logo_banner.jpg" alt="logo">
-<br></br>   
+<img class="logo" src="images/logo_banner.png" alt="logo" style="width: 20%; height: 20%;">
+<br>
 <div style="background-color:rgba(0, 0, 0, 0.9);">
 	   <div>
-	      <h1 class="probootstrap-heading"> Welcome to CCT Library </h1>
+	      <h1 class="probootstrap-heading"> Welcome to DIT Library </h1>
 	      	
 	  	         <div class="center-wrap">
 	  	         	<div>
@@ -30,7 +28,7 @@ session_destroy();
 	                	<input class="buttonSub" type="submit" name="submit" value="Sign Up" onclick="location.href='register.php';" />   
 	                </div>
 	             </div>
-	             <br></br>            
+	             <br>
 	   </div>
    
 </div>

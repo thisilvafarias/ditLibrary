@@ -1,14 +1,17 @@
 <?php
-ob_start(); 
-include('db.php'); 
-include('header.php'); 
+//ob_start();
 
+include('db.php'); 
+include('header.php');
+
+//declare user or password
+$username = "";
 $username = "";
 $password = "";
 
+//declare error from user or password inserted
 $usernameErr = "";
 $passwordErr = "";
-
 
 
 if($_POST){
@@ -24,37 +27,34 @@ if($_POST){
 	if (empty($usernameErr) && empty($passwordErr)) {		   
 
       try {
-		
-
+          /* Execute a prepared statement by binding PHP variables */
 		$q = $DBH->prepare("select * from libraryUsers where username = :username LIMIT 1");
+		//bind the same username find in the db with the username inserted by the user in the webpage
 		$q->bindValue(':username', $username);
 
 		$q->execute();
-		
-		$row = $q->fetch(PDO::FETCH_ASSOC);
-		
 
+		//returns an array indexed and assign to row
+		$row = $q->fetch(PDO::FETCH_ASSOC);
 
 		if ($q->rowCount() > 0) {
-			$phash = $row['password']; //$row['password'] is in my database, and now I am hasing it
+			$phash = $row['password']; //$row['password'] is in my database, and now I am hashing it
 
-				if ( $row['username'] == ("admin") && password_verify($password,$phash)) { //$password :
+                    /*check username in the DB          againts username entered by user
+                      check $phash (from DB and hashed) agains  $password entered by user*/
+				if ($row['username'] == ("admin") && password_verify($password,$phash)  ) { //$password :
 					$_SESSION["user_id"] = $row['user_id'];
 					$_SESSION["username"] = $username;
 					header("Location: admLibrary.php?username=".$_SESSION["username"]);
 					exit;
-	
 			}
 				else if (password_verify($password,$phash)) {
-					
-					
+
 					$_SESSION["user_id"] = $row['user_id'];
 					$_SESSION["username"] = $username;
 					
 					header("Location: studentLibrary.php?username=".$_SESSION["username"]);
 					exit;
-			
-					
 			}
 			else {
 				$message = 'Invalid password.';
@@ -68,9 +68,6 @@ if($_POST){
 	}
 	
 }
-
-
-
 
 ?>
 
@@ -86,8 +83,8 @@ if($_POST){
 
 
 <body class="bgimg">
-<img class="logo" src="images/logo_banner.jpg" alt="logo">
-<br></br>   
+    <img class="logo" src="images/logo_banner.png" alt="logo" style="width: 20%; height: 20%;">
+<br>
 	<div style="background-color:rgba(0, 0, 0, 0.9);">
 		
 		<form class='form-style' action="login.php" method="post">  
@@ -111,7 +108,7 @@ if($_POST){
 	
 	</div> 
 
-	<br></br> 
+	<br>
 
 </body>
 </html>
